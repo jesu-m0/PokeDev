@@ -30,8 +30,8 @@ export class PokeDevService {
                               };
                         })),
                         catchError(err => {
-                              console.error('Error fetching Pokémon list', err);
-                              return throwError(() => new Error('Error loading Pokémon list'));
+                              console.error('Error fetching Pokemon list', err);
+                              return throwError(() => new Error('Error loading Pokemon list'));
                         })
                   );
       }
@@ -57,6 +57,10 @@ export class PokeDevService {
                                           baseStat: s.base_stat
                                     }))
                               }
+                        }),
+                        catchError(err => {
+                              console.error('Error fetching Pokemon details', err);
+                              return throwError(() => new Error('Error loading Pokemon details'));
                         })
                   );
       }

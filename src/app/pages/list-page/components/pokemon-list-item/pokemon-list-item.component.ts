@@ -9,5 +9,11 @@ import { PokemonListItem } from '../../../../core/pokedev.model';
   styleUrl: './pokemon-list-item.component.css'
 })
 export class PokemonListItemComponent {
-      @Input() pokemon!: PokemonListItem;
+  @Input() pokemon!: PokemonListItem;
+  imageError = false;
+
+  onImageError() {
+    this.imageError = true;
+    console.warn(`Imposible to load the image of ${this.pokemon.name}`);
+  }
 }

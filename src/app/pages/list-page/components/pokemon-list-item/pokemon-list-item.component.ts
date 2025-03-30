@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonListItem } from '../../../../core/pokedev.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list-item',
@@ -12,8 +13,15 @@ export class PokemonListItemComponent {
   @Input() pokemon!: PokemonListItem;
   imageError = false;
 
-  onImageError() {
-    this.imageError = true;
-    console.warn(`Imposible to load the image of ${this.pokemon.name}`);
+  constructor(private router: Router) {}
+
+  onImageError(): void {
+      this.imageError = true;
+      console.warn(`Imposible to load the image of ${this.pokemon.name}`);
+  }
+
+  navigateToDetails(): void {
+    const id = this.pokemon.detailsUrl.split('/').slice(-2)[0];
+    this.router.navigate(['/details', id]);
   }
 }

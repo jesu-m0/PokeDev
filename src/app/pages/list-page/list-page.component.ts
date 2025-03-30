@@ -18,14 +18,14 @@ export class ListPageComponent implements OnInit {
 
       offset: number = 0;
 
-      constructor(private pokeService: PokeDevService) {}
+      constructor(private pokedevService: PokeDevService) {}
 
       ngOnInit(): void {
             //Get pokemon list
             this.updatePokemonList();
 
             //Get pokemon count
-            this.pokeService.getPokemonCount().subscribe({
+            this.pokedevService.getPokemonCount().subscribe({
                   next: (count: number) => {
                         this.pokemonCount = count;
                   },
@@ -54,7 +54,7 @@ export class ListPageComponent implements OnInit {
 
       updatePokemonList(){
 
-            this.pokeService.getPokemonList(20,this.offset).subscribe({ //Get the list of 20 pokemons
+            this.pokedevService.getPokemonList(20,this.offset).subscribe({ //Get the list of 20 pokemons
                   next: (pokemons: PokemonListItem[]) => {
                         this.pokemons = pokemons;
                   },

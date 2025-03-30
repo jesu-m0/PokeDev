@@ -41,7 +41,11 @@ export class PokeDevService {
             return parts[parts.length - 2]; //returns '1' (second to last element)
       }
 
-      getPokemonDetails(url: string): Observable<PokemonDetails> {
+      getPokemonDetails(id: string): Observable<PokemonDetails> {
+
+            const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+
             return this.http.get<PokeapiRawDetails>(url)
                   .pipe(
                         map(data => {

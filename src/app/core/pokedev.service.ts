@@ -65,6 +65,19 @@ export class PokeDevService {
                   );
       }
 
+      getPokemonCount(): Observable<number> {
+            const url = `${this.baseUrl}?limit=1&offset=0`;
+            return this.http.get<PokeapiList>(url)
+                  .pipe(
+                        map(data => data.count),
+                        catchError(err => {
+                              console.error('Error fetching Pokemon count', err);
+                              return throwError(() => new Error('Error loading Pokemon count'));
+                        })
+                  )
+
+      }
+
 
 
 }

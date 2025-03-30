@@ -1,15 +1,19 @@
-<div class="bg-white rounded-3xl overflow-hidden text-center w-40 h-40 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]
- group hover:shadow-[6px_6px_0px_rgba(0,0,0,0.2)]  transition-all duration-300 ease-in-out transform
+<div class="bg-white rounded-[2.5rem] overflow-hidden text-center w-40 h-40 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]
+ group hover:shadow-[6px_6px_0px_rgba(0,0,0,0.2)] transition-all duration-300 ease-in-out transform
  flex flex-col">
+
+
       <div class="h-[70%] group-hover:h-[65%] flex items-center justify-center
       transition-all duration-300 ease-in-out">
             <img [src]="pokemon.sprite" [alt]="pokemon.name" class="w-20 h-20 group-hover:w-24 group-hover:h-24 
             transition-all duration-300 ease-in-out" />
       </div>
 
+
       <div class="h-[30%] group-hover:h-[35%] bg-black text-white font-semibold text-lg group-hover:text-xl flex items-center justify-center
       transition-all duration-300 ease-in-out">
             {{ pokemon.name | titlecase }}
       </div>
 
+      
 </div>

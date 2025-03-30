@@ -1,4 +1,5 @@
 export interface PokeapiList {
+      count: number;
       results: PokeapiListItem[];
 }
 

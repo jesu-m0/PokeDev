@@ -1,7 +1,44 @@
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center max-w-4xl mx-auto">
-      <app-pokemon-list-item 
-            *ngFor="let p of pokemons" 
-            [pokemon]="p"
-      ></app-pokemon-list-item>
+<div class="py-14">
+      <p class="text-center">This will be the search bar</p>
+</div>
+
+
+
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center max-w-4xl mx-auto my-4">
+      <app-pokemon-list-item *ngFor="let p of pokemons" [pokemon]="p"></app-pokemon-list-item>
+</div>
+
+
+<!-- Pagination -->
+<div class="flex flex-col items-center py-6">
+
+      <!-- Help text -->
+      <span class="text-sm text-gray-700">
+            Showing <span class="font-semibold text-gray-900">{{ offset+1 }}</span> to <span
+                  class="font-semibold text-gray-900">{{ endIndex() }}</span> of <span class="font-semibold text-gray-900">{{ pokemonCount }}</span> entries
+      </span>
+
+      <div class="inline-flex mt-4 gap-2">
+            <!-- Buttons -->
+            <button (click)="previousPage()"
+                  class="bg-colors-accent rounded-full py-1 px-3 flex items-center text-white font-semibold hover:bg-colors-accentDark transition-colors">
+                  <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13 5H1m0 0 4 4M1 5l4-4" />
+                  </svg>
+                  Prev
+            </button>
+
+            <button (click)="nextPage()"
+                  class="bg-colors-accent rounded-full py-1 px-3 flex items-center text-white font-semibold hover:bg-colors-accentDark transition-colors">
+                  Next
+                  <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+            </button>
+      </div>
 
 </div>

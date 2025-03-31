@@ -25,12 +25,12 @@ describe('ListPageComponent', () => {
             }).compileComponents();
 
             pokeServiceSpy = TestBed.inject(PokeDevService) as jasmine.SpyObj<PokeDevService>;
-            pokeServiceSpy.getPokemonList.and.returnValue(of(mockPokemons)) //we set the spy method as to return the observable of mockPokemons
+            pokeServiceSpy.getPokemonList.and.returnValue(of(mockPokemons)) //we set the spy method to return the observable of mockPokemons
 
             fixture = TestBed.createComponent(ListPageComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
-            
+
       });
 
       it('should create component', () => {

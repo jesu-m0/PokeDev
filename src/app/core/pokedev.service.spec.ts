@@ -22,7 +22,7 @@ describe('PokeDevService', () => {
             http = TestBed.inject(HttpTestingController);
       });
 
-      it('API success: should get from API and transform Pokémon list', () => {
+      it('Get list API success: should get from API and transform Pokémon list', () => {
 
             const mockApiResponse = {
                   count: 2,
@@ -45,7 +45,7 @@ describe('PokeDevService', () => {
             req.flush(mockApiResponse);
       });
 
-      it('API fails: should handle error when fetching list', () => {
+      it('Get list API fails: should handle error when fetching list', () => {
 
             service.getPokemonList().subscribe({
                   next: () => fail('Testing methon in case API fails'),

@@ -9,6 +9,7 @@ import { PokemonListItem, PokemonDetails } from './pokedev.model';
       providedIn: 'root'
 })
 export class PokeDevService {
+      
       constructor(private http: HttpClient) { }
 
       baseUrl = "https://pokeapi.co/api/v2/pokemon";

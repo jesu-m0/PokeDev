@@ -38,8 +38,6 @@ export class ListPageComponent implements OnInit {
       nextPage(): void{
             
             if(this.offset+20<this.pokemonCount){ //Are we in the last page?
-                  console.log("nest");
-                  
                   this.offset +=20;
                   this.updatePokemonList();
             }

@@ -49,13 +49,15 @@ export class PokeDevService {
             return this.http.get<PokeapiRawDetails>(url)
                   .pipe(
                         map(data => {
+                              const weight = Number((data.weight*0.1).toFixed(2)); // 1 = 0.1kg
+                              const height = Number((data.height*0.1).toFixed(2)); // 1 = 0.1m
                               return {
                                     name: data.name,
                                     sprite: data.sprites.front_default,
                                     type: data.types.map(t => t.type.name),
                                     abilities: data.abilities.map(a => a.ability.name),
-                                    height: data.height,
-                                    weight: data.weight,
+                                    height: height,
+                                    weight: weight,
                                     stats: data.stats.map(s => ({
                                           name: s.stat.name,
                                           baseStat: s.base_stat

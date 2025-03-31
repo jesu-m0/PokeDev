@@ -21,7 +21,7 @@
       <div class="inline-flex mt-4 gap-2">
             <!-- Buttons -->
             <button (click)="previousPage()" [disabled]="offset === 0"
-                  class="bg-colors-accent rounded-full py-1 px-3 flex items-center text-white font-semibold hover:bg-colors-accentDark disabled:bg-colors-accentDark disabled:cursor-not-allowed transition-colors">
+                  class="bg-colors-accent py-1 px-3 flex items-center text-white font-semibold hover:bg-colors-accentDark disabled:bg-colors-accentDark disabled:cursor-not-allowed transition-colors">
                   <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -31,7 +31,7 @@
             </button>
 
             <button (click)="nextPage()" [disabled]="offset+20 > pokemonCount"
-                  class="bg-colors-accent rounded-full py-1 px-3 flex items-center text-white font-semibold hover:bg-colors-accentDark disabled:bg-colors-accentDark disabled:cursor-not-allowed transition-colors">
+                  class="bg-colors-accent py-1 px-3 flex items-center text-white font-semibold hover:bg-colors-accentDark disabled:bg-colors-accentDark disabled:cursor-not-allowed transition-colors">
                   Next
                   <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 14 10">

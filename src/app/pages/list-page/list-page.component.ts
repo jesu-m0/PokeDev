@@ -3,67 +3,77 @@ import { PokeDevService } from '../../core/pokedev.service';
 import { PokemonDetails, PokemonListItem } from '../../core/pokedev.model';
 import { PokemonListItemComponent } from './components/pokemon-list-item/pokemon-list-item.component';
 import { CommonModule } from '@angular/common';
+import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 
 @Component({
-  selector: 'app-list-page',
-  imports: [CommonModule, PokemonListItemComponent],
-  templateUrl: './list-page.component.html',
-  styleUrl: './list-page.component.css'
+      selector: 'app-list-page',
+      imports: [CommonModule, PokemonListItemComponent, SearchBarComponent],
+      templateUrl: './list-page.component.html',
+      styleUrl: './list-page.component.css'
 })
 export class ListPageComponent implements OnInit {
 
-      pokemons: PokemonListItem[] = [];
+      allPokemons: PokemonListItem[] = [];
+      filteredPokemons: PokemonListItem[] = [];
+      paginatedPokemons: PokemonListItem[] = []; //pokemons in the actual page
+      pageSize = 20;
+      offset = 0;
 
-      pokemonCount: number = 0;
+      pokemonCount: number = 0; //Calculated from filteredPokemons.size
 
-      offset: number = 0;
+      searchedPokemon: string = '';
 
-      constructor(private pokedevService: PokeDevService) {}
+      constructor(private pokedevService: PokeDevService) { }
 
       ngOnInit(): void {
-            //Get pokemon list
-            this.updatePokemonList();
 
-            //Get pokemon count
-            this.pokedevService.getPokemonCount().subscribe({
-                  next: (count: number) => {
-                        this.pokemonCount = count;
-                  },
-                  error: (err) => {
-                        console.error("Error while fetching pokemon count: ", err); 
-                  }
-            })
-      }
-
-      nextPage(): void{
-            
-            if(this.offset+20<this.pokemonCount){ //Are we in the last page?
-                  this.offset +=20;
-                  this.updatePokemonList();
-            }
-      }
-
-      previousPage(): void{
-            if(this.offset-20>=0){ //Are we in the first page?
-                  this.offset-=20;
-                  this.updatePokemonList();
-            }
-      }
-
-      updatePokemonList(){
-
-            this.pokedevService.getPokemonList(20,this.offset).subscribe({ //Get the list of 20 pokemons
-                  next: (pokemons: PokemonListItem[]) => {
-                        this.pokemons = pokemons;
+            //Load all pokemons
+            this.pokedevService.getPokemonList(100000, 0).subscribe({
+                  next: (pokemons) => {
+                        this.allPokemons = pokemons;
+                        this.filteredPokemons = this.allPokemons;  // At the beginning we show all the pokemomns
+                        this.pokemonCount = this.filteredPokemons.length;
+                        this.applyPagination();
                   },
                   error: (err) => {
                         console.error("Error while getting pokemon list: ", err);
                   }
-            })
+            });
+
       }
 
-      endIndex(): number{
-            return this.offset+20>this.pokemonCount? this.pokemonCount : this.offset+20;
+      filterBysearchedPokemon(searchTerm: string): void{
+            this.searchedPokemon = searchTerm.toLowerCase();
+            this.filteredPokemons = this.allPokemons.filter (pokemon => 
+                  pokemon.name.toLowerCase().includes(this.searchedPokemon)
+            );
+            this.offset = 0;
+            this.applyPagination();
+            this.pokemonCount = this.filteredPokemons.length;
+      }
+
+      applyPagination(): void {
+            this.paginatedPokemons = this.filteredPokemons.slice(this.offset, this.offset + this.pageSize);
+      }
+
+      nextPage(): void {
+
+            if (this.offset + this.pageSize < this.pokemonCount) { //last page?
+                  this.offset += this.pageSize;
+                  this.applyPagination();
+            }
+
+      }
+
+      previousPage(): void {
+            if (this.offset >= this.pageSize) { //first page?
+                  this.offset -= this.pageSize;
+                  this.applyPagination();
+            }
+      }
+
+      endIndex(): number {
+            return this.offset + 20 > this.pokemonCount ? this.pokemonCount : this.offset + 20;
       }
 
 }

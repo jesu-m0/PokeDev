@@ -21,7 +21,6 @@ export class PokemonListItemComponent {
   }
 
   navigateToDetails(): void {
-    const id = this.pokemon.detailsUrl.split('/').slice(-2)[0];
-    this.router.navigate(['/details', id]);
+    this.router.navigate(['/details', this.pokemon.id]);
   }
 }

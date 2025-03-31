@@ -1,11 +1,11 @@
 <div class="py-14">
-      <p class="text-center">This will be the search bar</p>
+      <app-search-bar (searchChange)="filterBysearchedPokemon($event)"></app-search-bar>
 </div>
 
 
 
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center max-w-4xl mx-auto my-4">
-      <app-pokemon-list-item *ngFor="let p of pokemons" [pokemon]="p"></app-pokemon-list-item>
+      <app-pokemon-list-item *ngFor="let p of paginatedPokemons" [pokemon]="p"></app-pokemon-list-item>
 </div>
 
 

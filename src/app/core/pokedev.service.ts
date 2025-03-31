@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
-import { PokeapiList, PokeapiRawDetails } from './pokeapi-raw.model';
+import { PokeapiList, PokeapiListItem, PokeapiRawDetails } from './pokeapi-raw.model';
 import { PokemonListItem, PokemonDetails } from './pokedev.model';
 
 @Injectable({
@@ -24,6 +24,7 @@ export class PokeDevService {
                         map(data => data.results.map(pokemon => {
                               const id = this.extractIdFromUrl(pokemon.url);
                               return {
+                                    id: id,
                                     name: pokemon.name,
                                     sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
                                     detailsUrl: pokemon.url
@@ -43,14 +44,14 @@ export class PokeDevService {
 
       getPokemonDetails(id: string): Observable<PokemonDetails> {
 
-            const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            const url = `${this.baseUrl}/${id}`;
 
 
             return this.http.get<PokeapiRawDetails>(url)
                   .pipe(
                         map(data => {
-                              const weight = Number((data.weight*0.1).toFixed(2)); // 1 = 0.1kg
-                              const height = Number((data.height*0.1).toFixed(2)); // 1 = 0.1m
+                              const weight = Number((data.weight * 0.1).toFixed(2)); // 1 = 0.1kg
+                              const height = Number((data.height * 0.1).toFixed(2)); // 1 = 0.1m
                               return {
                                     name: data.name,
                                     sprite: data.sprites.front_default,
@@ -71,17 +72,20 @@ export class PokeDevService {
                   );
       }
 
-      getPokemonCount(): Observable<number> {
-            const url = `${this.baseUrl}?limit=1&offset=0`;
+      getAllPokemonNames(): Observable<string[]> {
+
+            const url = `${this.baseUrl}?limit=100000&offset=0`;
+
             return this.http.get<PokeapiList>(url)
                   .pipe(
-                        map(data => data.count),
+                        map(data => {
+                              return data.results.map((pokemon: PokeapiListItem) => pokemon.name);
+                        }),
                         catchError(err => {
-                              console.error('Error fetching Pokemon count', err);
-                              return throwError(() => new Error('Error loading Pokemon count'));
+                              console.error('Error fetching pokemon names', err);
+                              return throwError (() => new Error('Error fetching pokemon names'));                              
                         })
-                  )
-
+                  );
       }
 
 

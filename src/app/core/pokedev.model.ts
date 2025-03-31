@@ -1,4 +1,5 @@
 export interface PokemonListItem {
+      id: string;
       name: string;
       sprite: string;
       detailsUrl: string;

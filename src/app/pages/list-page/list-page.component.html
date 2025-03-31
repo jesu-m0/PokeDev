@@ -1,16 +1,16 @@
-<div class="py-14">
+<div class="py-14 px-6">
       <app-search-bar (searchChange)="filterBysearchedPokemon($event)"></app-search-bar>
 </div>
 
 
-
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center max-w-4xl mx-auto my-4">
+<!-- pokemon list -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center max-w-4xl mx-auto px-6">
       <app-pokemon-list-item *ngFor="let p of paginatedPokemons" [pokemon]="p"></app-pokemon-list-item>
 </div>
 
 
 <!-- Pagination -->
-<div class="flex flex-col items-center py-6">
+<div class="flex flex-col items-center pt-10 pb-20">
 
       <!-- Help text -->
       <span class="text-sm text-gray-700">

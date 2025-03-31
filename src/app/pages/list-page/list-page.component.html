@@ -2,6 +2,12 @@
       <app-search-bar (searchChange)="filterBysearchedPokemon($event)"></app-search-bar>
 </div>
 
+<!-- error message -->
+<div *ngIf="errorMessage" class="bg-colors-accent/30 text-colors-accentDark px-4 py-3 max-w-2xl mb-6 shadow-no-blur mx-6 lg:mx-auto"
+      role="alert">
+      <strong class="font-bold">¡Ups!</strong>
+      <span class="block sm:inline ms-2">{{ errorMessage }}</span>
+</div>
 
 <!-- pokemon list -->
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center max-w-4xl mx-auto px-6">
@@ -14,8 +20,9 @@
 
       <!-- Help text -->
       <span class="text-sm text-gray-700">
-            Showing <span class="font-semibold text-gray-900">{{ offset+1 }}</span> to <span
-                  class="font-semibold text-gray-900">{{ endIndex() }}</span> of <span class="font-semibold text-gray-900">{{ pokemonCount }}</span> entries
+            Showing <span class="font-semibold text-gray-900">{{ offset+1==1?0:1 }}</span> to <span
+                  class="font-semibold text-gray-900">{{ endIndex() }}</span> of <span
+                  class="font-semibold text-gray-900">{{ pokemonCount }}</span> entries
       </span>
 
       <div class="inline-flex mt-4 gap-2">

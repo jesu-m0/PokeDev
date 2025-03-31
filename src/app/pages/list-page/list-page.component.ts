@@ -19,6 +19,8 @@ export class ListPageComponent implements OnInit {
       pageSize = 20;
       offset = 0;
 
+      errorMessage = '';
+
       pokemonCount: number = 0; //Calculated from filteredPokemons.size
 
       searchedPokemon: string = '';
@@ -37,6 +39,7 @@ export class ListPageComponent implements OnInit {
                   },
                   error: (err) => {
                         console.error("Error while getting pokemon list: ", err);
+                        this.errorMessage = err;
                   }
             });
 

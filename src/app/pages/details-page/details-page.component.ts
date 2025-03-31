@@ -15,7 +15,9 @@ export class DetailsPageComponent implements OnInit {
 
       pokemon!: PokemonDetails;
 
-      imageError = false;
+      errorMessage: string = '';
+
+      imageError: boolean = false;
 
       constructor(
             private route: ActivatedRoute,
@@ -32,6 +34,7 @@ export class DetailsPageComponent implements OnInit {
                   },
                   error: (err) => {
                         console.error('Error loading pokemon details:', err);
+                        this.errorMessage = err;
                   }
             });
       }
